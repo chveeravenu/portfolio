@@ -1,4 +1,4 @@
-"use client";  // Ensure this component runs only on the client
+"use client";  // Forces this file to run only on the client
 
 import { useEffect, useState } from "react";
 import { personalData } from "@/utils/data/personal-data";
@@ -14,30 +14,30 @@ import Head from "next/head";
 export default function Home() {
   const [blogs, setBlogs] = useState([]);
 
-  // useEffect(() => {
-  //   async function getData() {
-  //     try {
-  //       const res = await fetch(
-  //         `https://dev.to/api/articles?username=${personalData.devUsername}`
-  //       );
+  useEffect(() => {
+    async function getData() {
+      try {
+        const res = await fetch(
+          `https://dev.to/api/articles?username=${personalData.devUsername}`
+        );
 
-  //       if (!res.ok) {
-  //         throw new Error("Failed to fetch data");
-  //       }
+        if (!res.ok) {
+          throw new Error("Failed to fetch data");
+        }
 
-  //       const data = await res.json();
-  //       const filtered = data
-  //         .filter((item) => item?.cover_image)
-  //         .sort(() => Math.random() - 0.5);
+        const data = await res.json();
+        const filtered = data
+          .filter((item) => item?.cover_image)
+          .sort(() => Math.random() - 0.5);
 
-  //       setBlogs(filtered);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
+        setBlogs(filtered);
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
-  //   getData();
-  // }, []);
+    getData();
+  }, []);
 
   return (
     <>
@@ -46,7 +46,7 @@ export default function Home() {
         <meta name="description" content="This is my Next.js project." />
       </Head>
 
-      <div suppressHydrationWarning>
+      <div>
         <HeroSection />
         <AboutSection />
         <Experience />
